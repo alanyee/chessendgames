@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset='utf-8'>
+
+  <title>Alan Yee's Homepage</title>
+
+  <style type='text/css'>
+
+  element.style {}
+
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a:active {
+    text-decoration: underline;
+  }
+
+  .date {
+    color: #aaa;
+    margin-left: 1em;
+  }
+
+  h1, h2, h3, h4 {
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    margin: 1em auto 4em auto;
+    position: relative;
+    tab-size: 2;  
+    width: 960px;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+  }
+
+  table, td {
+    border:1px solid #d4d4d4;
+    border-collapse:collapse;
+    padding-left:5px
+  }
+
+  th {
+    color: #ffffff;
+    background-color: #555555;
+    border: 1px solid #d4d4d4;
+    padding: 1px;
+  }
+
+  tr:nth-child(odd)  {background-color:#f1f1f1;}
+  tr:nth-child(even) {background-color:#ffffff;}
+
+  .bar {
+    fill: #1f77b4;
+  }
+
+  svg text{
+    fill: white;
+  }
+
+  .bar:hover {
+    fill: brown;
+  }
+
+  .axis text {
+    font: 11px helvetica;
+    fill: black
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  </style>
+
+</head>
+<!--TODO: Add bootstrap to replace table and make a standarized view of entire website for all browsers-->
+<body>
+  <header><a href='https://www.linkedin.com/pub/alan-yee/52/b25/b38'>Alan Yee</a>
+  <span class='date'>December 15, 2015</span></header>
+  <h1 align='left'>An Analysis of Chess: Endgames</h1>
+
+<script src='http://d3js.org/d3.v3.min.js'></script>
+<h2><font color=#666>The Most Common Endgames</h2>
+
+<table style='position:absolute;margin-top:300px; margin-left:600px;' border='0' cellpadding='10'>
+  <tbody>
+    <tr>
+      <td valign='top' align='left'>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'> 
+        = <a href='https://en.wikipedia.org/wiki/Rook_(chess)'>Rook</a>
+        <br>
+          <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'> 
+          = <a href='https://en.wikipedia.org/wiki/Pawn_(chess)'>Pawn</a>
+        <br>
+          <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'> 
+          = <a href='https://en.wikipedia.org/wiki/Bishop_(chess)'>Bishop</a>
+        <br>
+          <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'> 
+          = <a href='https://en.wikipedia.org/wiki/Knight_(chess)'>Knight</a>
+        <br>
+          <img border='0' src='img/p_queen.gif' alt='Queen' width='13' height='14' title='Queen'> 
+          = <a href='https://en.wikipedia.org/wiki/Queen_(chess)'>Queen</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id='area1'>
+  <table style='position:absolute' border='0' cellpadding='1' width='243'>
+    <tbody>
+      <tr>
+        <th>Winning</th>
+        <th>Losing</th>
+      </tr>
+      <tr>
+        <td> <!-- 1 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 2 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 3 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 4 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 5 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 6 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 7 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 8 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 9 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 10 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 11 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 12 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 13 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 14 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 15 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 16 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 17 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 18 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 19 -->
+        <img border='0' src='img/p_queen.gif' alt='Queen' width='13' height='14' title='Queen'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_queen.gif' alt='Queen' width='13' height='14' title='Queen'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 20 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 21 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 22 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 23 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 24 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 25 -->
+        <img border='0' src='img/p_queen.gif' alt='Queen' width='13' height='14' title='Queen'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_queen.gif' alt='Queen' width='13' height='14' title='Queen'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 26 -->
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 27 -->
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 28 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_bishop.gif' alt='Bishop' width='13' height='14' title='Bishop'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 29 -->
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+      <tr>
+        <td> <!-- 30 -->
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+        <td>
+        <img border='0' src='img/p_rook.gif' alt='Rook' width='12' height='14' title='Rook'>
+        <img border='0' src='img/p_knight.gif' alt='Knight' width='12' height='14' title='Knight'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        <img border='0' src='img/p_pawn.gif' alt='Pawn' width='11' height='14' title='Pawn'>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+
+(function() {
+  var margin = {top: 18, right: 10, bottom: 10, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom + 199;
+
+  var x = d3.scale.linear()
+    .range([0, 625]);
+
+  var y = d3.scale.ordinal()
+    .rangeRoundBands([0, height], 0.05);
+
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient('bottom');
+
+  var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient('right');
+
+  var chart1 = d3.select('#area1')
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom + 10)
+    .append('g')
+      .attr('transform', 'translate(300,' + margin.top + ')');
+
+  d3.tsv('data1.tsv', type, function(error, data) {
+    x.domain(d3.extent(data, function(d) { return d.value; })).nice();
+    y.domain(data.map(function(d) { return d.name; }));
+
+    chart1.selectAll('.bar')
+        .data(data)
+      .enter().append('rect')
+        .attr('class', function(d) { return d.value < 0 ? 'bar negative' : 'bar positive'; })
+        .attr('x', function(d) { return x(Math.min(0, d.value)); })
+        .attr('y', function(d) { return y(d.name); })
+        .attr('width', function(d) { return Math.abs(x(d.value) - x(0)); })
+        .attr('height', y.rangeBand());
+
+    chart1.selectAll('text')
+        .data(data)
+      .enter().append('text')
+        .attr('x', function(d) { return Math.abs(x(d.value) - x(0)); })
+        .attr('y', function(d){ return y(d.name) + y.rangeBand()/2; } )
+        .attr('dx', -65)
+        .attr('dy', '.36em')
+        .attr('text-anchor', 'end') 
+        .text(function(d) { return d.value; });
+
+    chart1.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(xAxis)
+      .append('text')
+        .attr('x', 500)
+        .attr('y', -10)
+        .style('text-anchor', 'end')
+        .text('Number of Games');
+
+    chart1.append('g')
+      .attr('class', 'y axis');
+  });
+
+  function type(d) {
+    d.value = +d.value;
+    return d;
+  }
+})();
+
+</script>
+<div style='color: black'>
+  <p>
+  In extrapolating an 
+  <a href='http://www.chessgames.com/chessstats.html'>online chess database</a> 
+  of 721,983 games, I have visualized a total sum of 
+  112,073 games that make up the top thirty most common 
+  <a href='https://en.wikipedia.org/wiki/Chess_endgame'>endgames</a> 
+  — the chart on the left shows the remaining pieces for each side 
+  when the game ends. Though since this data spans from 1475 to 2014, 
+  this graph may  not be entirely pertinent for the modern metagame, 
+  but still holds value for the history of chess and the game itself. 
+  Also, since the database's average 
+  <a href='https://en.wikipedia.org/wiki/Elo_rating_system'>Elo ranking</a> 
+  is 2199, any analysis here may not apply much for beginners or 
+  novices, or any games between players with a significant difference in Elo.
+  </p>
+  <p>
+  Now then, this visualization holds many interesting details 
+  just waiting to be dissected and analysed.
+  </p>
+</div>
+<h3><font color=#666>The Sustainability of Pieces</h3>
+<div id='area2'></div>
+<script>
+
+(function() {
+  var margin = {top: 20, right: 40, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+  var formatPercent = d3.format('.0%');
+
+  var x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], 0.1);
+
+  var x1 = d3.scale.ordinal();
+
+  var y = d3.scale.linear()
+    .range([height, 0]);
+
+  var color = d3.scale.ordinal()
+    .range(['#8a89a6', '#d0743c']);
+
+  var xAxis = d3.svg.axis()
+    .scale(x0)
+    .orient('bottom');
+
+  var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient('left')
+    .tickFormat(formatPercent);
+
+  var chart2 = d3.select('#area2').append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+  d3.csv('data2.csv', function(error, data) {
+    var ageNames = d3.keys(data[0]).filter(function(key) { return key !== 'State'; });
+
+    data.forEach(function(d) {
+      d.ages = ageNames.map(function(name) { return {name: name, value: +d[name]}; });
+    });
+
+    x0.domain(data.map(function(d) { return d.State; }));
+    x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+    y.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
+
+    chart2.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis);
+
+    chart2.append('g')
+        .attr('class', 'y axis')
+        .call(yAxis)
+      .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 6)
+        .attr('dy', '.71em')
+        .style('text-anchor', 'end')
+        .text('Sustainability');
+
+    var state = chart2.selectAll('.state')
+        .data(data)
+      .enter().append('g')
+        .attr('class', 'g')
+        .attr('transform', function(d) { return 'translate(' + x0(d.State) + ',0)'; });
+
+    state.selectAll('rect')
+        .data(function(d) { return d.ages; })
+      .enter().append('rect')
+        .attr('width', x1.rangeBand())
+        .attr('x', function(d) { return x1(d.name); })
+        .attr('y', function(d) { return y(d.value); })
+        .attr('height', function(d) { return height - y(d.value); })
+        .style('fill', function(d) { return color(d.name); });
+
+    var legend = chart2.selectAll('.legend')
+        .data(ageNames.slice())
+      .enter().append('g')
+        .attr('class', 'legend')
+        .attr('transform', function(d, i) { return 'translate(0,' + i * 20 + ')'; });
+
+    legend.append('rect')
+      .attr('x', width - 18)
+      .attr('width', 18)
+      .attr('height', 18)
+      .style('fill', color);
+
+    legend.append('text')
+      .attr('x', width - 24)
+      .attr('y', 9)
+      .attr('dy', '.35em')
+      .style('fill', 'black')
+      .style('text-anchor', 'end')
+      .text(function(d) { return d; });
+  });
+})();
+
+</script>
+<div style='color: black'>
+  <p>
+  This graph shows a piece's sustainability — the likeliness 
+  a piece will survive until the endgame. The king always 
+  survive since that piece cannot be eaten, while none of the 
+  common endgames ended with a second copy of a knight, bishop, 
+  and rook. If you are winning, pawn are basically guaranteed to 
+  have at least one pawn in your arsenal. If you have a rook, 
+  your enemy is likely to have a rook; this applies vice versa, 
+  and such a mirror scenario occurs for the players' possession of their 
+  respective queens. Winning side has a little over 11% in sustainability 
+  for their bishops than the losing side's, while the losing side's 
+  is 8% more likely to live. This information speaks to the common 
+  theory that bishops work better than knights, on their own, as 
+  knights synergize with the movements and positions of the pawns, 
+  and as the game progresses, both sides start losing their pawns.
+  </p>
+</div>
+
+<h4><font color=#666>The Difference in Point Advantage</h4>
+
+<div id='area3'></div>
+<script>
+
+(function() {
+
+  var width = 960,
+    height = 500,
+    radius = Math.min(width, height) / 2;
+
+  var color = d3.scale.ordinal()
+    .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', 
+            '#a05d56', '#d0743c', '#ff8c00']);
+
+  var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+  var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d.percentage; });
+
+  var chart3 = d3.select('#area3').append('svg')
+      .attr('width', width)
+      .attr('height', height)
+    .append('g')
+      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+  d3.csv('data3.csv', function(error, data) {
+
+    data.forEach(function(d) {
+      d.percentage = +d.percentage;
+    });
+
+    var g = chart3.selectAll('.arc')
+        .data(pie(data))
+      .enter().append('g')
+        .attr('class', 'arc');
+
+    g.append('path')
+      .attr('d', arc)
+      .style('stroke', '#fff')
+      .style('fill', function(d) { return color(d.data.adv); });
+
+    g.append('text')
+      .attr('transform', function(d) { return 'translate(' + arc.centroid(d) + ')'; })
+      .attr('dy', '.35em')
+      .style('text-anchor', 'middle')
+      .text(function(d) { return d.data.adv; });
+  });
+})();
+
+</script>
+<div style='color: black'>
+  <p>
+  The data also reveals that 
+  <a href='https://en.wikipedia.org/wiki/Chess_piece_relative_value#Standard_valuations'>
+    points
+  </a> 
+  matter. In analysing the game of chess, past scholars have 
+  made a standardized value system that nominates points for all 
+  the pieces of the game. Pawns are worth 1 each, bishops and 
+  knights are worth are 3 each, rooks are worth 5 each, the queen is
+  worth 9, and the king is worth 1. So each player starts with 
+  39 in total, and each lose points as each lose each's 
+  respective pieces. The graph shows that the winning side 
+  usually either 1 or 2 points ahead, or both sides are tied.
+  </p>
+</div>
+
+<footer>
+  <p>
+  Data Source: <a href='http://www.chessgames.com'>Chessgames webmaster: August 12, 2014</a>
+  </p>
+</footer>
+
+</body>
+
+</html>
