@@ -583,7 +583,7 @@
     .append('g')
       .attr('transform', 'translate(300,' + margin.top + ')');
 
-  d3.tsv('data1.tsv', type, function(error, data) {
+  d3.tsv('https://raw.githubusercontent.com/alanyee/chessendgames/refs/heads/master/data1.tsv', type, function(error, data) {
     x.domain(d3.extent(data, function(d) { return d.value; })).nice();
     y.domain(data.map(function(d) { return d.name; }));
 
@@ -685,7 +685,7 @@
     .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  d3.csv('data2.csv', function(error, data) {
+  d3.csv('https://raw.githubusercontent.com/alanyee/chessendgames/refs/heads/master/data2.csv', function(error, data) {
     var ageNames = d3.keys(data[0]).filter(function(key) { return key !== 'State'; });
 
     data.forEach(function(d) {
@@ -797,7 +797,7 @@
     .append('g')
       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-  d3.csv('data3.csv', function(error, data) {
+  d3.csv('https://raw.githubusercontent.com/alanyee/chessendgames/refs/heads/master/data3.csv', function(error, data) {
 
     data.forEach(function(d) {
       d.percentage = +d.percentage;
